@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Copy to Clipboard</title>
+</head>
+<body>
+    <script>
+        // 从 URL 参数中获取字段值
+        const urlParams = new URLSearchParams(window.location.search);
+        const fieldValue = urlParams.get('field');
+
+        if (fieldValue) {
+            // 创建一个临时的 textarea 元素
+            const textarea = document.createElement('textarea');
+            textarea.value = fieldValue;
+            document.body.appendChild(textarea);
+
+            // 选择并复制内容
+            textarea.select();
+            document.execCommand('copy');
+
+            // 删除临时的 textarea 元素
+            document.body.removeChild(textarea);
+
+            // 跳转到目标 URL
+            window.location.href = urlParams.get('url');
+        } else {
+            alert('No field value provided.');
+        }
+    </script>
+</body>
+</html>
