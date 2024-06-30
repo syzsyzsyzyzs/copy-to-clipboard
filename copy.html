@@ -6,11 +6,15 @@
 </head>
 <body>
     <script>
-        // 从 URL 参数中获取字段值
+        // 从 URL 参数中获取字段值和目标 URL
         const urlParams = new URLSearchParams(window.location.search);
         const fieldValue = urlParams.get('field');
+        const targetUrl = urlParams.get('url');
 
-        if (fieldValue) {
+        console.log('Field value:', fieldValue);
+        console.log('Target URL:', targetUrl);
+
+        if (fieldValue && targetUrl) {
             // 创建一个临时的 textarea 元素
             const textarea = document.createElement('textarea');
             textarea.value = fieldValue;
@@ -23,10 +27,10 @@
             // 删除临时的 textarea 元素
             document.body.removeChild(textarea);
 
-            // 跳转到目标 URL
-            window.location.href = urlParams.get('url');
+            // 使用 window.location.replace 进行跳转
+            window.location.replace(targetUrl);
         } else {
-            alert('No field value provided.');
+            alert('Field value or target URL not provided.');
         }
     </script>
 </body>
