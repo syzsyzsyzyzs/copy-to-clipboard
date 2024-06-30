@@ -1,47 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>Copy to Clipboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复制并跳转</title>
 </head>
 <body>
+    <button id="copyAndGo">点击复制并跳转</button>
     <script>
-        // 从 URL 参数中获取字段值和目标 URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const fieldValue = urlParams.get('field');
-        const targetUrl = urlParams.get('url');
-
-        console.log('Field value:', fieldValue);
-        console.log('Target URL:', targetUrl);
-
-        if (fieldValue && targetUrl) {
-            // 创建一个临时的 textarea 元素
-            const textarea = document.createElement('textarea');
-            textarea.value = fieldValue;
-            textarea.setAttribute('readonly', '');
-            textarea.style.position = 'absolute';
-            textarea.style.left = '-9999px';
-            document.body.appendChild(textarea);
-
-            // 选择并复制内容
-            textarea.select();
-            textarea.setSelectionRange(0, fieldValue.length); // 适配部分 iOS 设备
-            let successful = document.execCommand('copy');
-
-            if (successful) {
-                console.log('Text copied successfully');
-            } else {
-                console.error('Unable to copy text');
-            }
-
-            // 删除临时的 textarea 元素
-            document.body.removeChild(textarea);
-
-            // 使用 window.location.replace 进行跳转
-            window.location.replace(targetUrl);
-        } else {
-            alert('Field value or target URL not provided.');
-        }
+        document.getElementById('copyAndGo').addEventListener('click', function() {
+            // 复制字段值到剪贴板
+            navigator.clipboard.writeText('123456').then(function() {
+                console.log('字段值已复制到剪贴板');
+                // 跳转到指定URL
+                window.location.href = 'https://forms.office.com/pages/responsepage.aspx?id=LcE82WA3PUWkxckujBPGInWV3iXg-tNOp9zHSl8tVgpURjQxVE9DSVI5MDdMVktJNVlZS1hZWU0xRyQlQCN0PWcu';
+            }, function(err) {
+                console.error('无法复制字段值', err);
+            });
+        });
     </script>
 </body>
 </html>
