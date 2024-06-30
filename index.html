@@ -19,8 +19,8 @@
         .first-line {
             font-family: 'Source Han Sans CN';
             font-size: 16px;
-            color: black;
-            font-weight: normal;
+            color: rgb(29, 8, 143);
+            font-weight: bold;
         }
         .second-line {
             font-family: 'Source Han Sans CN';
@@ -37,7 +37,15 @@
     </style>
 </head>
 <body>
-    <button id="copyAndGo">点击复制Activity ID, 在新网页中可直接粘贴</button>
+    <!-- <button id="copyAndGo">点击复制Activity ID, 在新网页中可直接粘贴</button> -->
+
+    <div class="centered">
+        <div class="button-container" id="copyAndGo">
+            <span class="first-line">点击复制Activity ID, 在新网页中可以直接粘贴</span><br>
+            <span class="second-line">如果表单中已有信息，建议点击右上角"···"，选择清除表单，再填写</span>
+        </div>
+    </div>
+
     <script>
         document.getElementById('copyAndGo').addEventListener('click', function() {
             // 从URL获取字段值
