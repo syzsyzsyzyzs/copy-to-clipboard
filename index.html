@@ -3,20 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>复制并跳转</title>
+    <title>动态复制并跳转</title>
 </head>
 <body>
     <button id="copyAndGo">点击复制并跳转</button>
     <script>
         document.getElementById('copyAndGo').addEventListener('click', function() {
-            // 复制字段值到剪贴板
-            navigator.clipboard.writeText('123456').then(function() {
-                console.log('字段值已复制到剪贴板');
-                // 跳转到指定URL
-                window.location.href = 'https://forms.office.com/pages/responsepage.aspx?id=LcE82WA3PUWkxckujBPGInWV3iXg-tNOp9zHSl8tVgpURjQxVE9DSVI5MDdMVktJNVlZS1hZWU0xRyQlQCN0PWcu';
-            }, function(err) {
-                console.error('无法复制字段值', err);
-            });
+            // 从URL获取字段值
+            const params = new URLSearchParams(window.location.search);
+            const fieldValue = params.get('value'); // 假设URL中的参数名为value
+
+            if (fieldValue) {
+                // 复制字段值到剪贴板
+                navigator.clipboard.writeText(fieldValue).then(function() {
+                    console.log('字段值已复制到剪贴板');
+                    // 跳转到指定URL
+                    window.location.href = 'https://forms.office.com/pages/responsepage.aspx?id=LcE82WA3PUWkxckujBPGInWV3iXg-tNOp9zHSl8tVgpURjQxVE9DSVI5MDdMVktJNVlZS1hZWU0xRyQlQCN0PWcu';
+                }, function(err) {
+                    console.error('无法复制字段值', err);
+                });
+            } else {
+                console.error('URL中没有提供字段值');
+            }
         });
     </script>
 </body>
